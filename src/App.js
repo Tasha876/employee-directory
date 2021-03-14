@@ -1,5 +1,6 @@
 import React from 'react';
 import EmployeeCard from './components/EmployeeCard';
+import HyperLink from './components/EmployeeCard';
 import Wrapper from './components/Wrapper';
 import Title from './components/Title';
 import API from './API';
@@ -19,53 +20,6 @@ class App extends React.Component {
         this.setState({ employees: employeeList })
       });
   }
-
-  getGreeting(name) {
-  let list = [
-    `Hi, I'm ${name}. Goodday!`,
-    `Hey, my name is ${name}.`,
-    `How are you, I'm ${name}.`,
-    `I'm ${name}. Pleased to meet you!`
-  ]
-
-  return list[Math.floor(Math.random() * list.length)]
-  }
-
-  getCity(location) {
-  let list = [
-    `I'm from ${location.city}, ${location.country}.`,
-    `I'm located in ${location.city}, ${location.country}.`,
-    `I'm from ${location.country}, more specifically ${location.city}.`,
-    `I live in ${location.city}, ${location.country}.`
-  ]
-
-  return list[Math.floor(Math.random() * list.length)]
-  }
-
-  getEmail(email) {
-  let list = [
-    `Contact me at ` + email,
-    `My email address is ` + email,
-    `Reach me at ` + email,
-    `You can get in touch with me at ` + email,
-    `Get a hold of me at ` + email
-  ]
-
-  return list[Math.floor(Math.random() * list.length)]
-  
-}
-
-  getUserName(username) {
-  let list = [
-    'This is my github, ' + username,
-    'My github is ' + username,
-    'Look at my github, its ' + username,
-    'See all my cool repos on github, I\'m ' + username
-  ]
-
-  return list[Math.floor(Math.random() * list.length)]
-  
-}
   
   regenEmp(id, employees) {
       API.regenEmployee(id, employees)
@@ -83,11 +37,11 @@ class App extends React.Component {
       this.state.employees.map(employee => (
         <EmployeeCard 
           key={employee.id}
-          name={this.getGreeting(`${employee.name.first} ${employee.name.last}`)}
+          name={`${employee.name.first} ${employee.name.last}`}
           image={employee.picture.large}
-          location={this.getCity(employee.location)}
-          email={this.getEmail(employee.email)}
-          github={this.getUserName(employee.login.username)}
+          location={employee.location}
+          email={employee.email} 
+          github={employee.login.username}
           end={() => {
             console.log(employee)
             // set so onle this component rerenders on "regenEmp"
@@ -96,7 +50,8 @@ class App extends React.Component {
             } 
           }
           toDel={this.state.delId === employee.id}
-        />
+        >
+        </EmployeeCard>
     ))
       }
     </Wrapper>

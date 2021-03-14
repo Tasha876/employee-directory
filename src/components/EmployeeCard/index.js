@@ -3,6 +3,59 @@ import { memo } from "react";
 import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const getGreeting = (name) => {
+  let list = [
+    `Hi, I'm ${name}. Goodday!`,
+    `Hey, my name is ${name}.`,
+    `How are you, I'm ${name}.`,
+    `I'm ${name}. Pleased to meet you!`
+  ]
+
+  return list[Math.floor(Math.random() * list.length)]
+}
+
+
+const getCity = (location) => {
+  let list = [
+    `I'm from ${location.city}, ${location.country}.`,
+    `I'm located in ${location.city}, ${location.country}.`,
+    `I'm from ${location.country}, more specifically ${location.city}.`,
+    `I live in ${location.city}, ${location.country}.`
+  ]
+
+  return list[Math.floor(Math.random() * list.length)]
+}
+
+function HyperLink(props) {
+    return (
+    <a href={"mailto:" + props.email}>{props.email}</a>
+    )
+}
+
+const getEmail = (email) => {
+  let list = [
+    `Contact me at `,
+    `My email address is `,
+    `Reach me at `,
+    `You can get in touch with me at `,
+    `Get a hold of me at `
+  ]
+
+  return list[Math.floor(Math.random() * list.length)]
+  }
+
+const getUserName = (username) =>{
+  let list = [
+    'This is my github, ' + username,
+    'My github is ' + username,
+    'Look at my github, its ' + username,
+    'See all my cool repos on github, I\'m ' + username
+  ]
+
+  return list[Math.floor(Math.random() * list.length)]
+  
+  }
+
 const EmployeeCardMemo = (props) => {
   return (
     <div className="card">
@@ -12,16 +65,17 @@ const EmployeeCardMemo = (props) => {
       <div className="content">
         <ul>
           <li>
-            {props.name}
+            { getGreeting(props.name) }
           </li>
           <li>
-           {props.location}
+           { getCity(props.location)}
           </li>
           <li>
-            {props.github}
+            { getUserName(props.github) }
           </li>
           <li>
-            {props.email}
+            { getEmail(props.email) }
+            <HyperLink email={props.email}> </HyperLink>
           </li>
         </ul>
       </div>
@@ -37,3 +91,5 @@ export const EmployeeCard = memo(EmployeeCardMemo,(prevProps, nextProps) => {
 })
 
 export default EmployeeCard;
+
+export {HyperLink};
