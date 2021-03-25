@@ -27,6 +27,7 @@ Screenshot:
 ![Screenshot](screenshot.png)
 
 <a name="deployed"></a>
+## 3. Deployed Site
 [Deployed site](https://tasha876.github.io/employee-directory), hosted gy GitHub pages.
 
 <a name="support"></a>
