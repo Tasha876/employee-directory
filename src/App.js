@@ -13,6 +13,7 @@ class App extends React.Component {
     employees: [],
     nonFilteredEmps: [],
     delId: 0,
+    filteredBy: "none"
   };
 
   componentDidMount() {
@@ -22,8 +23,8 @@ class App extends React.Component {
       });
   }
   
-  regenEmp(id, employees, nonFilteredEmps) {
-    API.regenEmployee(id, employees)
+  regenEmp(id, employees, filter = "none") {
+    API.regenEmployee(id, employees, filter)
       .then(employeeList => {
         this.setState({ employees: employeeList.list})
     });
@@ -59,7 +60,7 @@ class App extends React.Component {
           github={employee.login.username}
           end={() => {
             this.setState({toDel: true})
-            this.regenEmp(employee.id, this.state.employees, this.state.nonFilteredEmps)
+            this.regenEmp(employee.id, this.state.employees, this.state.filteredBy)
             } 
           }
           toDel={this.state.delId === employee.id}

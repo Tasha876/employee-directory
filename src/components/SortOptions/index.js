@@ -29,12 +29,12 @@ const SortOptions = (props) => {
   const SortByList = [
         // value will be the value or sortBy
           {
-              desc: "First Name", value: "name.first", func: () => {
+              desc: "First name", value: "name.first", func: () => {
                 sortEmployees()
               }
           },
           {
-              desc: "Last Name", value: "name.last", func: () => {
+              desc: "Last name", value: "name.last", func: () => {
                 sortEmployees()
               }
           },
@@ -51,7 +51,7 @@ const SortOptions = (props) => {
     <div className="options">
       
     {SortByList.map(sort => (
-            <label><input type="radio" name="gender" onClick={()=>{sortBy=sort.value; sort.func()}}></input>{sort.desc}</label>
+            <label><input type="radio" name="gender" onClick={()=>{sortBy=sort.value; sort.func()}}></input> {sort.desc}</label>
         )
     )}
     </div>

@@ -4,26 +4,23 @@ import "./style.css"
 
 const FilterOptions = (props) => {
 
+
+// this sets the employee list to the filtered list
 const setEmployees = (spec,value) => {
-    console.log(props.employees)
-    // props.setStateApp(props.nonFilteredEmps, props.employees)
-    // props.setStateApp("nonFilteredEmps", props.employees)
     props.setStateApp("employees", props.nonFilteredEmps.filter(
         employee => employee[spec] === value
       ))
-      console.log("emps",props.employees, props.nonFilteredEmps)
-
+    props.setStateApp("filteredBy", value)
 }
 
+// this sets the employee list back to the non-filtered list
 const resetEmployees = () => {
-    // props.setStateApp("nonFilteredEmps", props.employees)
-    console.log("bf",props.employees)
     props.setStateApp("employees", props.nonFilteredEmps)
-    console.log(props.employees)
-    console.log("after",props.employees)
-    // console.log(props.employees)
+    props.setStateApp("filteredBy", "none")
+
 }
 
+// list containing options for filter and their corresponding funcitons
 const filterByList = [
         {
             value: "Show only women", func: () => {
