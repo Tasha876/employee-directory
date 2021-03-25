@@ -17,14 +17,14 @@ Automatically generates a list of random employees. Lets you filter or sort thes
 ### Summary of functionality
 - The user can 'regenerate' an employee and get a new one.
 - The user can filter employees by gender.
-    - after the employee is filtered, the regenerate button will only produce 'matching' employees.
+    - After the employee is filtered, the regenerate button will only produce 'matching' employees.
 - The user can sort employees, by first or last name or by city.
 - Every employee has a unique way of giving their info.
 
 <a name="visuals"></a>
 ## 2. Visuals
-Screenshot of the CLI:
-![Screenshot of CLI](screenshot.png)
+Screenshot:
+![Screenshot](screenshot.png)
 
 <a name="deployed"></a>
 To come!
