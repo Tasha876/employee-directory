@@ -22,22 +22,21 @@ const API = {
             return employee
         })
         )
-        // .then(emps => employees = emps)
         .then(employees => employees)
     },
 
     regenEmployee(oldEmployeeId, employeeList) {
-        let oldEmpIndex = employeeList.findIndex((employee) =>
+        let oldEmpIndex = employeeList.findIndex(employee =>
             employee.id === oldEmployeeId 
         )
-        console.log(oldEmpIndex)
         return this.getEmployee()
-        .then(newEmployee => {
-            console.log(newEmployee)
+        .then(
+            newEmployee => {
             employeeList.splice(oldEmpIndex,1,newEmployee)
-            return employeeList
+            return {list: employeeList, newEmp: newEmployee}
         })
     }
+
 }
 
 export default API

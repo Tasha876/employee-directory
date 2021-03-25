@@ -7,7 +7,7 @@ const getGreeting = (name) => {
   let list = [
     `Hi, I'm ${name}. Goodday!`,
     `Hey, my name is ${name}.`,
-    `How are you, I'm ${name}.`,
+    `How are you? I'm ${name}.`,
     `I'm ${name}. Pleased to meet you!`
   ]
 
@@ -32,7 +32,7 @@ function HyperLink(props) {
     )
 }
 
-const getEmail = (email) => {
+const getEmail = () => {
   let list = [
     `Contact me at `,
     `My email address is `,
@@ -46,10 +46,10 @@ const getEmail = (email) => {
 
 const getUserName = (username) =>{
   let list = [
-    'This is my github, ' + username,
-    'My github is ' + username,
-    'Look at my github, its ' + username,
-    'See all my cool repos on github, I\'m ' + username
+    'This is my github, ' + username + '.',
+    'My github is ' + username + '.',
+    'Look at my github, its ' + username + '.',
+    'See all my cool repos on github, I\'m ' + username + '.'
   ]
 
   return list[Math.floor(Math.random() * list.length)]
@@ -74,7 +74,7 @@ const EmployeeCardMemo = (props) => {
             { getUserName(props.github) }
           </li>
           <li>
-            { getEmail(props.email) }
+            { getEmail() }
             <HyperLink email={props.email}> </HyperLink>
           </li>
         </ul>
@@ -86,10 +86,7 @@ const EmployeeCardMemo = (props) => {
 
 // so only the chose employee regenerated on "regenEmp"
 export const EmployeeCard = memo(EmployeeCardMemo,(prevProps, nextProps) => {
-  console.log(prevProps, nextProps)
   return prevProps.toDel === false
 })
 
 export default EmployeeCard;
-
-export {HyperLink};

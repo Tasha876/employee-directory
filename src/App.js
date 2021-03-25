@@ -1,6 +1,7 @@
 import React from 'react';
 import EmployeeCard from './components/EmployeeCard';
-import HyperLink from './components/EmployeeCard';
+import FilterOptions from './components/FilterOptions';
+import SortOptions from "./components/SortOptions"
 import Wrapper from './components/Wrapper';
 import Title from './components/Title';
 import API from './API';
@@ -10,29 +11,43 @@ class App extends React.Component {
   
   state = {
     employees: [],
+    nonFilteredEmps: [],
     delId: 0,
   };
 
   componentDidMount() {
     API.getEmployees()
       .then(employeeList => {
-        console.log(employeeList)
-        this.setState({ employees: employeeList })
+        this.setState({ employees: employeeList, nonFilteredEmps: employeeList })
       });
   }
   
-  regenEmp(id, employees) {
-      API.regenEmployee(id, employees)
-        .then(employeeList => {
-          // console.log(employeeList)
-          this.setState({ employees: employeeList })
-      });
+  regenEmp(id, employees, nonFilteredEmps) {
+    API.regenEmployee(id, employees)
+      .then(employeeList => {
+        this.setState({ employees: employeeList.list})
+    });
+  }
+
+  setStateApp = (state, value) => {
+    this.setState({[state]: value})
   }
 
   render() {
     return (
-      <Wrapper>
+      <div>
       <Title>Employee List</Title>
+      <FilterOptions
+      employees={this.state.employees}
+      setStateApp={this.setStateApp}
+      nonFilteredEmps={this.state.nonFilteredEmps}
+      />
+      <SortOptions
+      employees={this.state.employees}
+      setStateApp={this.setStateApp}
+      nonFilteredEmps={this.state.nonFilteredEmps}
+      />
+      <Wrapper>
       {
       this.state.employees.map(employee => (
         <EmployeeCard 
@@ -43,10 +58,8 @@ class App extends React.Component {
           email={employee.email} 
           github={employee.login.username}
           end={() => {
-            console.log(employee)
-            // set so onle this component rerenders on "regenEmp"
             this.setState({toDel: true})
-            this.regenEmp(employee.id, this.state.employees)
+            this.regenEmp(employee.id, this.state.employees, this.state.nonFilteredEmps)
             } 
           }
           toDel={this.state.delId === employee.id}
@@ -55,6 +68,7 @@ class App extends React.Component {
     ))
       }
     </Wrapper>
+    </div>
     )
   };
 }

@@ -1,11 +1,13 @@
 .wrapper {
-  padding-top: 50px;
-  background: #ECEFF1;
   height: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  padding: 20px;
+  display: grid;
   justify-content: space-around;
-  align-content: flex-start;
   overflow: auto;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+@media (max-width: 700px) {
+  .wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  }
 }
