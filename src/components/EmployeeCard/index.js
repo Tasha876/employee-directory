@@ -33,7 +33,6 @@ function EmailLink(props) {
 }
 
 function GitHubLink({github}) {
-  console.log(github)
   return (
     <a href={"http://github.com/" + github}>{github}</a>
   )

@@ -24,7 +24,6 @@ class App extends React.Component {
   }
   
   regenEmp(id, employees, filter = "none", nonFilteredEmps = this.state.nonFilteredEmps) {
-    console.log(nonFilteredEmps)
     API.regenEmployee(id, employees, filter, nonFilteredEmps)
       .then(employeeList => {
         this.setState({ employees: employeeList.filtered, nonFilteredEmps: employeeList.nonFiltered})

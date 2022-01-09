@@ -51,7 +51,7 @@ const SortOptions = (props) => {
     <div className="options">
       
     {SortByList.map(sort => (
-            <label><input type="radio" name="gender" onClick={()=>{sortBy=sort.value; sort.func()}}></input> {sort.desc}</label>
+            <label key={sort.desc}><input type="radio" name="gender" onClick={()=>{sortBy=sort.value; sort.func()}}></input> {sort.desc}</label>
         )
     )}
     </div>

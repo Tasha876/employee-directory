@@ -45,7 +45,7 @@ const filterByList = [
     <p className="text-center">Filter By:</p>
     <div className="options">
     {filterByList.map(filter => (
-            <label><input type="radio" name="sortBy" onClick={filter.func}></input>{filter.value}</label>
+            <label key={filter.value}><input type="radio" name="sortBy" onClick={filter.func}></input>{filter.value}</label>
         )
     )}
     </div>
