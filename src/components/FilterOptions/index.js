@@ -34,7 +34,7 @@ const filterByList = [
             }
         },
         {
-            value: "Reset", func: () => {
+            value: "Show both", func: () => {
               resetEmployees()
             }
         },

@@ -26,30 +26,42 @@ const getCity = (location) => {
   return list[Math.floor(Math.random() * list.length)]
 }
 
-function HyperLink(props) {
+function EmailLink(props) {
     return (
-    <a href={"mailto:" + props.email}>{props.email}</a>
+      <a href={"mailto:" + props.email}>{props.email}</a>
     )
 }
 
-const getEmail = () => {
+function GitHubLink({github}) {
+  console.log(github)
+  return (
+    <a href={"http://github.com/" + github}>{github}</a>
+  )
+}
+
+const GetEmail = ({email}) => {
+
+  const emailComponent = <EmailLink email = {email}/>
+
   let list = [
-    `Contact me at `,
-    `My email address is `,
-    `Reach me at `,
-    `You can get in touch with me at `,
-    `Get a hold of me at `
+    <>Contact me at {emailComponent}`</>,
+    <>My email address is {emailComponent}</>,
+    <>Reach me at {emailComponent}</>,
+    <>You can get in touch with me at {emailComponent}</>,
+    <>Get a hold of me at {emailComponent}</>
   ]
 
   return list[Math.floor(Math.random() * list.length)]
   }
 
-const getUserName = (username) =>{
+const GetUserName = ({github}) =>{
+  const userNameComp = <GitHubLink github = {github}/>
+
   let list = [
-    'This is my github, ' + username + '.',
-    'My github is ' + username + '.',
-    'Look at my github, its ' + username + '.',
-    'See all my cool repos on github, I\'m ' + username + '.'
+    <>This is my github, {userNameComp}.</>,
+    <>My github is {userNameComp}.</>,
+    <>Look at my github, its {userNameComp}.</>,
+    <>See all my cool repos on github, I'm {userNameComp}.</>
   ]
 
   return list[Math.floor(Math.random() * list.length)]
@@ -71,11 +83,11 @@ const EmployeeCardMemo = (props) => {
            { getCity(props.location)}
           </li>
           <li>
-            { getUserName(props.github) }
+            <GetUserName github = {props.github}/>
           </li>
           <li>
-            { getEmail() }
-            <HyperLink email={props.email}> </HyperLink>
+            {/* { getEmail() } */}
+            <GetEmail email={props.email}/>
           </li>
         </ul>
       </div>
