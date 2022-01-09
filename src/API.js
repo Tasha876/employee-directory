@@ -25,8 +25,11 @@ const API = {
         .then(employees => employees)
     },
 
-    regenEmployee(oldEmployeeId, employeeList, filter) {
+    regenEmployee(oldEmployeeId, employeeList, filter, nonFilteredEmps) {
         let oldEmpIndex = employeeList.findIndex(employee =>
+            employee.id === oldEmployeeId 
+        )
+        let oldAllEmpIndex = nonFilteredEmps.findIndex(employee =>
             employee.id === oldEmployeeId 
         )
         return this.getEmployee()
@@ -34,9 +37,10 @@ const API = {
             newEmployee => {
                 if (filter === "none" || newEmployee.gender === filter) {
                     employeeList.splice(oldEmpIndex,1,newEmployee)
-                    return {list: employeeList, newEmp: newEmployee}
+                    nonFilteredEmps.splice(oldAllEmpIndex,1,newEmployee)
+                    return {filtered: employeeList, nonFiltered: nonFilteredEmps}
                 } else {
-                    return this.regenEmployee(oldEmployeeId, employeeList,filter)
+                    return this.regenEmployee(oldEmployeeId, employeeList,filter, nonFilteredEmps)
                 }
         })
     }

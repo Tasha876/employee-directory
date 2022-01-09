@@ -23,10 +23,11 @@ class App extends React.Component {
       });
   }
   
-  regenEmp(id, employees, filter = "none") {
-    API.regenEmployee(id, employees, filter)
+  regenEmp(id, employees, filter = "none", nonFilteredEmps = this.state.nonFilteredEmps) {
+    console.log(nonFilteredEmps)
+    API.regenEmployee(id, employees, filter, nonFilteredEmps)
       .then(employeeList => {
-        this.setState({ employees: employeeList.list})
+        this.setState({ employees: employeeList.filtered, nonFilteredEmps: employeeList.nonFiltered})
     });
   }
 
@@ -39,14 +40,14 @@ class App extends React.Component {
       <div>
       <Title>Employee List</Title>
       <FilterOptions
-      employees={this.state.employees}
-      setStateApp={this.setStateApp}
-      nonFilteredEmps={this.state.nonFilteredEmps}
+        employees={this.state.employees}
+        setStateApp={this.setStateApp}
+        nonFilteredEmps={this.state.nonFilteredEmps}
       />
       <SortOptions
-      employees={this.state.employees}
-      setStateApp={this.setStateApp}
-      nonFilteredEmps={this.state.nonFilteredEmps}
+        employees={this.state.employees}
+        setStateApp={this.setStateApp}
+        nonFilteredEmps={this.state.nonFilteredEmps}
       />
       <Wrapper>
       {

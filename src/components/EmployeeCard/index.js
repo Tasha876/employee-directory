@@ -84,7 +84,7 @@ const EmployeeCardMemo = (props) => {
   );
 }
 
-// so only the chose employee regenerated on "regenEmp"
+// so only the chosen employee regenerated on "regenEmp"
 export const EmployeeCard = memo(EmployeeCardMemo,(prevProps, nextProps) => {
   return prevProps.toDel === false
 })
