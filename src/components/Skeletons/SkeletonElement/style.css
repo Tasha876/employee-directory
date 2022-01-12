@@ -1,0 +1,19 @@
+.skeleton {
+    background: lightgrey;
+}
+
+.image {
+    box-sizing: border-box;
+    padding: calc(50% - 0.5rem - 5px) 0.5rem;
+    margin: 0.5rem;
+    height: 0;
+    width: calc(100% - 1rem);
+    border-radius: 50%;
+    border: 5px solid white;
+}
+
+.text {
+    width: calc(100% - 0.5rem);
+    height: 1em;
+    border-radius: 3px;
+}

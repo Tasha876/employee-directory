@@ -2,6 +2,7 @@
   height: 100%;
   display: grid;
   justify-content: space-around;
+  align-items: flex-start;
   overflow: auto;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }

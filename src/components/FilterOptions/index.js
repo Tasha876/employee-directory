@@ -42,12 +42,13 @@ const filterByList = [
     
   return (
     <>
-    <p className="text-center">Filter By:</p>
     <div className="options">
-    {filterByList.map(filter => (
-            <label key={filter.value}><input type="radio" name="sortBy" onClick={filter.func}></input>{filter.value}</label>
-        )
-    )}
+      <div className={'btn-group'}>
+        {filterByList.map(filter => (
+                <button className={'btn btn-outline-primary'} key={filter.value} name="sortBy" onClick={filter.func}>{filter.value}</button>
+            )
+        )}
+      </div>
     </div>
     </>);
 }

@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { memo } from "react";
 import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SkeletonElement from "../Skeletons/SkeletonElement";
 
-const getGreeting = (name) => {
+function EmailLink({email}) {
+
+  return (
+    <a href={"mailto:" + email}>{email}</a>
+  )
+}
+
+function GitHubLink(props) {
+
+  const { github } = props
+  
+  return (
+    <a href={"http://github.com/" + github}>{github}</a>
+  )
+}
+
+const getGreeting = (props) => {
+
+  const { name, id } = props
+
   let list = [
     `Hi, I'm ${name}. Goodday!`,
     `Hey, my name is ${name}.`,
@@ -11,50 +31,27 @@ const getGreeting = (name) => {
     `I'm ${name}. Pleased to meet you!`
   ]
 
-  return list[Math.floor(Math.random() * list.length)]
+  return list[(id + name.charCodeAt(0)) % list.length] 
+  // this is so the greeting looks random but it isn't (shhh...), just so the greeating stays the same between renders
 }
 
+const GetEmail = (props) => {
 
-const getCity = (location) => {
-  let list = [
-    `I'm from ${location.city}, ${location.country}.`,
-    `I'm located in ${location.city}, ${location.country}.`,
-    `I'm from ${location.country}, more specifically ${location.city}.`,
-    `I live in ${location.city}, ${location.country}.`
-  ]
-
-  return list[Math.floor(Math.random() * list.length)]
-}
-
-function EmailLink(props) {
-    return (
-      <a href={"mailto:" + props.email}>{props.email}</a>
-    )
-}
-
-function GitHubLink({github}) {
-  return (
-    <a href={"http://github.com/" + github}>{github}</a>
-  )
-}
-
-const GetEmail = ({email}) => {
-
-  const emailComponent = <EmailLink email = {email}/>
+  const emailComponent = <EmailLink email = {props.email}/>
 
   let list = [
-    <>Contact me at {emailComponent}`</>,
+    <>Contact me at {emailComponent}</>,
     <>My email address is {emailComponent}</>,
     <>Reach me at {emailComponent}</>,
     <>You can get in touch with me at {emailComponent}</>,
     <>Get a hold of me at {emailComponent}</>
   ]
 
-  return list[Math.floor(Math.random() * list.length)]
-  }
+  return list[(props.id + props.email.charCodeAt(0)) % list.length]
+}
 
-const GetUserName = ({github}) =>{
-  const userNameComp = <GitHubLink github = {github}/>
+const GetUserName = (props) => {
+  const userNameComp = <GitHubLink github = {props.github}/>
 
   let list = [
     <>This is my github, {userNameComp}.</>,
@@ -63,30 +60,43 @@ const GetUserName = ({github}) =>{
     <>See all my cool repos on github, I'm {userNameComp}.</>
   ]
 
-  return list[Math.floor(Math.random() * list.length)]
-  
-  }
+  return list[(props.id + props.github.charCodeAt(0)) % list.length]
+}
+
+const getCity = (props) => {
+
+  const { location, id } = props
+
+  let list = [
+    `I'm from ${location.city}, ${location.country}.`,
+    `I'm located in ${location.city}, ${location.country}.`,
+    `I'm from ${location.country}, more specifically ${location.city}.`,
+    `I live in ${location.city}, ${location.country}.`
+  ]
+
+  return list[(id + location.city.charCodeAt(0)) % list.length]
+}
 
 const EmployeeCardMemo = (props) => {
+
   return (
     <div className="card">
       <div className="img-container">
-        <img className="img-thumbnail rounded-circle" alt={props.name} src={props.image} />
+        {props.loaded ? <img className="img-thumbnail rounded-circle" alt={props.name} src={props.image} /> : <SkeletonElement type={'image'}/>}
       </div>
       <div className="content">
         <ul>
           <li>
-            { getGreeting(props.name) }
+            { props.loaded ? getGreeting(props) : <SkeletonElement type={'text'}/>}
           </li>
           <li>
-           { getCity(props.location)}
+           { props.loaded ? getCity(props) : <SkeletonElement type={'text'}/>}
           </li>
           <li>
-            <GetUserName github = {props.github}/>
+            {props.loaded ? <GetUserName github = {props.github} id={props.id}/> : <SkeletonElement type={'text'}/>}
           </li>
           <li>
-            {/* { getEmail() } */}
-            <GetEmail email={props.email}/>
+            {props.loaded ? <GetEmail email={props.email} id={props.id}/> : <SkeletonElement type={'text'}/>}
           </li>
         </ul>
       </div>
@@ -96,8 +106,8 @@ const EmployeeCardMemo = (props) => {
 }
 
 // so only the chosen employee regenerated on "regenEmp"
-export const EmployeeCard = memo(EmployeeCardMemo,(prevProps, nextProps) => {
-  return prevProps.toDel === false
+const EmployeeCard = memo(EmployeeCardMemo,(prevProps, nextProps) => {
+  return prevProps.id === nextProps.id
 })
 
 export default EmployeeCard;

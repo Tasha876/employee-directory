@@ -2,7 +2,11 @@ import axios from "axios"
 
 let idGenerator = 0;
 
+// const numEmployees = 10,
+
 const API = {
+
+    NUM_EMPLOYEES: 10,
 
     getEmployee() {
         return axios.get('https://randomuser.me/api/')
@@ -14,7 +18,7 @@ const API = {
             })
     },
 
-    getEmployees(n = 10) {
+    getEmployees(n = this.NUM_EMPLOYEES) {
         return axios.get("https://randomuser.me/api/?results=" + n)
         .then(res => res.data.results
         .map(employee => {

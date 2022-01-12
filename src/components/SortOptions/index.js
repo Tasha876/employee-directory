@@ -47,13 +47,13 @@ const SortOptions = (props) => {
     
   return (
     <>
-    <p className="text-center">Sort By:</p>
     <div className="options">
-      
-    {SortByList.map(sort => (
-            <label key={sort.desc}><input type="radio" name="gender" onClick={()=>{sortBy=sort.value; sort.func()}}></input> {sort.desc}</label>
-        )
-    )}
+      <div className={'btn-group'}>
+      {SortByList.map(sort => (
+              <button className={'btn btn-outline-primary'} key={sort.desc} name="sortBy" onClick={()=>{sortBy=sort.value; sort.func()}}>Sort by {sort.desc.toLocaleLowerCase()}</button>
+          )
+      )}
+      </div>
     </div>
     </>);
 }

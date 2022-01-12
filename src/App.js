@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import EmployeeCard from './components/EmployeeCard';
 import FilterOptions from './components/FilterOptions';
 import SortOptions from "./components/SortOptions"
@@ -8,21 +8,28 @@ import API from './API';
 import { render } from 'react-dom';
 
 class App extends React.Component {
-  
-  state = {
-    employees: [],
-    nonFilteredEmps: [],
-    delId: 0,
-    filteredBy: "none"
-  };
+
+  constructor(){
+    super()
+    this.state = {
+      loaded: false,
+      employees: [],
+      nonFilteredEmps: [],
+      delId: 0,
+      filteredBy: "none"
+    };
+  }
 
   componentDidMount() {
     API.getEmployees()
       .then(employeeList => {
-        this.setState({ employees: employeeList, nonFilteredEmps: employeeList })
-      });
-  }
-  
+        this.setState({ employees: employeeList, nonFilteredEmps: employeeList})
+      })
+      .then(() => {
+        this.setState({ loaded: true })
+      })
+  };
+
   regenEmp(id, employees, filter = "none", nonFilteredEmps = this.state.nonFilteredEmps) {
     API.regenEmployee(id, employees, filter, nonFilteredEmps)
       .then(employeeList => {
@@ -50,24 +57,24 @@ class App extends React.Component {
       />
       <Wrapper>
       {
-      this.state.employees.map(employee => (
+      this.state.loaded? (
+        this.state.employees.map(employee => (
         <EmployeeCard 
           key={employee.id}
+          id={employee.id}
+          loaded={this.state.loaded}
           name={`${employee.name.first} ${employee.name.last}`}
-          image={employee.picture.large}
+          image={employee.picture.large || ''}
           location={employee.location}
           email={employee.email} 
           github={employee.login.username}
           end={() => {
-            this.setState({toDel: true})
             this.regenEmp(employee.id, this.state.employees, this.state.filteredBy)
             } 
           }
-          toDel={this.state.delId === employee.id}
         >
         </EmployeeCard>
-    ))
-      }
+    ))): [...Array(API.NUM_EMPLOYEES)].map(_=><EmployeeCard loaded={this.state.loaded}/>)}
     </Wrapper>
     </div>
     )
