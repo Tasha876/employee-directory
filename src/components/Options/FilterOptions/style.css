@@ -3,3 +3,7 @@
     justify-content: space-around;
     margin-bottom: 1em;
 }
+
+.btn-group .btn {
+    width: 20ch;
+}

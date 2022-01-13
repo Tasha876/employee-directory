@@ -80,9 +80,9 @@ const getCity = (props) => {
 const EmployeeCardMemo = (props) => {
 
   return (
-    <div className="card">
+    <div className="card border border-primary">
       <div className="img-container">
-        {props.loaded ? <img className="img-thumbnail rounded-circle" alt={props.name} src={props.image} /> : <SkeletonElement type={'image'}/>}
+        {props.loaded ? <img className="img-thumbnail" alt={props.name} src={props.image} /> : <SkeletonElement type={'image'}/>}
       </div>
       <div className="content">
         <ul>
@@ -93,10 +93,10 @@ const EmployeeCardMemo = (props) => {
            { props.loaded ? getCity(props) : <SkeletonElement type={'text'}/>}
           </li>
           <li>
-            {props.loaded ? <GetUserName github = {props.github} id={props.id}/> : <SkeletonElement type={'text'}/>}
+            {props.loaded ? <GetUserName github = {props.github} id={props.id}/> : <> <SkeletonElement type={'text'}/>  <SkeletonElement type={'text half'}/> </>}
           </li>
           <li>
-            {props.loaded ? <GetEmail email={props.email} id={props.id}/> : <SkeletonElement type={'text'}/>}
+            {props.loaded ? <GetEmail email={props.email} id={props.id}/> : <> <SkeletonElement type={'text'}/>  <SkeletonElement type={'text half'}/> </>}
           </li>
         </ul>
       </div>

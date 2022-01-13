@@ -1,8 +1,10 @@
-import React from "react";
-import App from "../../App"
+import React, { useState } from "react";
 import "./style.css"
 
 const FilterOptions = (props) => {
+
+
+const [active, setActive] = useState('')
 
 
 // this sets the employee list to the filtered list
@@ -15,37 +17,45 @@ const setEmployees = (spec,value) => {
 
 // this sets the employee list back to the non-filtered list
 const resetEmployees = () => {
+    setActive('')
     props.setStateApp("employees", props.nonFilteredEmps)
     props.setStateApp("filteredBy", "none")
+}
 
+const filterByGender = (gender) => {
+    if (active !== gender) {
+      setActive(gender)
+      setEmployees("gender",gender)
+    }
+    else {
+      resetEmployees()
+    }
 }
 
 // list containing options for filter and their corresponding funcitons
 const filterByList = [
         {
-            value: "Show only women", func: () => {
-              setEmployees("gender","female")
-            }
+            value: "only women",
+            key: "female",
+            func: ()=>filterByGender("female")
         },
         {
-            value: "Show only men", func: () => {
-
-              setEmployees("gender","male")
-            }
-        },
-        {
-            value: "Show both", func: () => {
-              resetEmployees()
-            }
+            value: "only men", 
+            key: "male",
+            func: ()=>filterByGender("male")
         },
       ]
     
   return (
     <>
     <div className="options">
-      <div className={'btn-group'}>
+      <div className={'btn-group-vertical'}>
         {filterByList.map(filter => (
-                <button className={'btn btn-outline-primary'} key={filter.value} name="sortBy" onClick={filter.func}>{filter.value}</button>
+                <button 
+                  className={`btn btn-outline-primary ${active === filter.key ? 'active' : ''}`} 
+                  key={filter.value} 
+                  onClick={filter.func}>{active === filter.key? `Showing ${filter.value}` : `Show ${filter.value}`}
+                </button>
             )
         )}
       </div>

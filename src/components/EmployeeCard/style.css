@@ -1,17 +1,17 @@
 .card {
   background: #fff;
-  border-radius: 2px;
+  border-radius: 5px;
   margin: 1rem;
-  padding: 0 0 1rem 0;
   position: relative;
-  box-shadow: 0 10px 20px #00000088;
-  flex-direction: column !important;
+  display: flex;
+  flex-direction: row !important;
   text-align: left;
+  align-items: center;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 500px) {
   .card {
-    flex-direction: column !important;
+    /* flex-direction: column !important; */
   }
   .card > .img-container {
     width: 100% !important;
@@ -19,20 +19,20 @@
 }
 
 .card > .img-container {
-  width: 100%;
+  width: 50%;
   text-align: center;
-  background: lightblue;
   padding: 0.5rem;
 }
 .card > .img-container > img {
-  width: 100%;
   height: auto;
+  width: 100%;
   background: white;
 }
 
 .card > .content {
   padding-inline: 1.5rem;
   font-size: 15px;
+  width: 100%;
 }
 
 .card > .content > ul {
@@ -42,18 +42,20 @@
 }
 
 .card > .content > ul > li {
-  margin-top: 18px;
+  margin-top: 0.5em;
 }
 
 .card > .remove {
-  color: hsl(219, 30%, 33%);
+  align-self: flex-start;
+  color: var(--primary);
   font-size: 48px;
-  position: absolute;
-  top: -20px;
-  right: 5px;
+  width: 1.75rem;
+  position: relative;
+  top: -18px;
+  right: 6px;
   cursor: pointer;
 }
 
 .card > .remove:hover {
-  color: hsl(219, 100%, 29%);
+  color: var(--danger);
 }

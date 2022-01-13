@@ -1,7 +1,8 @@
 import React, { createRef } from 'react';
 import EmployeeCard from './components/EmployeeCard';
-import FilterOptions from './components/FilterOptions';
-import SortOptions from "./components/SortOptions"
+import Options from './components/Options';
+import FilterOptions from './components/Options/FilterOptions';
+import SortOptions from "./components/Options/SortOptions"
 import Wrapper from './components/Wrapper';
 import Title from './components/Title';
 import API from './API';
@@ -43,18 +44,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
       <Title>Employee List</Title>
-      <FilterOptions
-        employees={this.state.employees}
-        setStateApp={this.setStateApp}
-        nonFilteredEmps={this.state.nonFilteredEmps}
-      />
-      <SortOptions
-        employees={this.state.employees}
-        setStateApp={this.setStateApp}
-        nonFilteredEmps={this.state.nonFilteredEmps}
-      />
+      <div>
+        <Options>
+          <FilterOptions
+            employees={this.state.employees}
+            setStateApp={this.setStateApp}
+            nonFilteredEmps={this.state.nonFilteredEmps}
+          />
+          <SortOptions
+            employees={this.state.employees}
+            setStateApp={this.setStateApp}
+            nonFilteredEmps={this.state.nonFilteredEmps}
+          />
+        </Options>
       <Wrapper>
       {
       this.state.loaded? (
@@ -77,6 +81,7 @@ class App extends React.Component {
     ))): [...Array(API.NUM_EMPLOYEES)].map(_=><EmployeeCard loaded={this.state.loaded}/>)}
     </Wrapper>
     </div>
+    </>
     )
   };
 }

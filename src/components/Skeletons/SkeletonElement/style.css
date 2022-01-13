@@ -2,18 +2,23 @@
     background: lightgrey;
 }
 
-.image {
-    box-sizing: border-box;
-    padding: calc(50% - 0.5rem - 5px) 0.5rem;
-    margin: 0.5rem;
+.skeleton.image {
+    padding: calc(50% - 0.5rem) 0.5rem;
+    margin: 0;
     height: 0;
-    width: calc(100% - 1rem);
-    border-radius: 50%;
+    width: 100%;
+    border-radius: 5px;
     border: 5px solid white;
+    outline: 1px solid lightgrey;
 }
 
-.text {
+.skeleton.text {
     width: calc(100% - 0.5rem);
     height: 1em;
     border-radius: 3px;
+    margin: 0.5em;
+}
+
+.skeleton.text.half {
+    width: calc(50% - 0.5rem);
 }

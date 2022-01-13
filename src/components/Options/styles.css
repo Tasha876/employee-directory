@@ -1,0 +1,8 @@
+.options-panel {
+    margin: 1rem auto;
+    width: 15%;
+    height: 100%;
+    overflow: hidden;
+    position: sticky;
+    top: 1rem
+}

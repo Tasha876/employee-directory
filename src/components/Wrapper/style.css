@@ -1,13 +1,14 @@
 .wrapper {
   height: 100%;
+  width: 100%;
   display: grid;
   justify-content: space-around;
   align-items: flex-start;
   overflow: auto;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 }
 
-@media (max-width: 700px) {
+@media (max-width: 500px) {
   .wrapper {
     grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   }
